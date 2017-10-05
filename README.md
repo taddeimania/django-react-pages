@@ -70,7 +70,7 @@ The components are all stored in the static directory under `static/app/src` and
 
 In order to use 1 component per page, we want to avoid a large bundle being created as webpack would typically try to do. In order to do that we have to specify the name of each component separately (as you would in an Angular Module type of system).
 
-For example, the `entry` portion of your component would look like this:
+For example, the `entry` portion of your config would look like this:
 
 ```js
   entry: {
