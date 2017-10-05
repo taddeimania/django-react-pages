@@ -68,18 +68,7 @@ class IndexView(ReactView):
 
 The components are all stored in the static directory under `static/app/src` and the webpack configuration contains definitions for all components.
 
-In order to use 1 component per page, we want to avoid a large bundle being created as webpack would typically try to do. In order to do that we have to specify the name of each component separately (as you would in an Angular Module type of system).
-
-For example, the `entry` portion of your config would look like this:
-
-```js
-  entry: {
-    myPeople: "../app/src/components/MyPeople.jsx",
-    userDetail: "../app/src/components/UserDetail.jsx"
-  },
-```
-
-As you add new components, you need to add them to this `entry` attribute.
+As you add new components, you webpack will recognize them - you may just need to restart your webpack process for adding or removing files.
 
 Each component in this project is treated as it's own react app, so that means each component must mount intself to the `react` element coming from the django template.
 
