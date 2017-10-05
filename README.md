@@ -68,7 +68,7 @@ class IndexView(ReactView):
 
 The components are all stored in the static directory under `static/app/src` and the webpack configuration contains definitions for all components.
 
-As you add new components, you webpack will recognize them - you may just need to restart your webpack process for adding or removing files.
+As you add new components, webpack will recognize them - you may need to restart the webpack process for adding or removing files.
 
 Each component in this project is treated as it's own react app, so that means each component must mount intself to the `react` element coming from the django template.
 
