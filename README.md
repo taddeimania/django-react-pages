@@ -11,9 +11,7 @@ react component. [Inspired from this article](https://hackernoon.com/reconciling
 git clone https://github.com/taddeimania/django-react-pages.git
 ```
 
-2.1) Create a virtualenv (this project will use direnv, but if you aren't then just create as you are most comfortable)
-
-2.2) Install python dependencies
+2) Create a virtualenv (this project will use direnv, but if you aren't then just create as you are most comfortable) and Install python dependencies
 
 ```
 pip install -r requirements.txt
