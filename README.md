@@ -54,19 +54,15 @@ For any props that you want to make available to the component you must add thos
 class IndexView(ReactView):
     component = 'MyPeople.js'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['props'] = {
+    def get_props(self):
+        return { 
             'users': [
                 'joel',
                 'sarah',
                 'peanut'
             ]
         }
-        return context
 ```
-
-TODO: implement `get_props()` method on `ReactView`
 
 ### React
 
