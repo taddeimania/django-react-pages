@@ -39,3 +39,73 @@ webpack
 Or just turn on `webpack -w` to watch during development
 
 6) Navigate your browser to `http://localhost:8000`
+
+## Workflow
+
+### Django
+
+Any page that will rely on a react component needs to inherit from the provided `ReactView`.
+
+In your inherited `ReactView` you must define the name of the component on the class as `component = 'componentName.js'`.
+
+For any props that you want to make available to the component you must add those to the view context as such:
+
+```python
+class IndexView(ReactView):
+    component = 'MyPeople.js'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['props'] = {
+            'users': [
+                'joel',
+                'sarah',
+                'peanut'
+            ]
+        }
+        return context
+```
+
+TODO: implement `get_props()` method on `ReactView`
+
+### React
+
+The components are all stored in the static directory under `static/app/src` and the webpack configuration contains definitions for all components.
+
+In order to use 1 component per page, we want to avoid a large bundle being created as webpack would typically try to do. In order to do that we have to specify the name of each component separately (as you would in an Angular Module type of system).
+
+For example, the `entry` portion of your component would look like this:
+
+```js
+  entry: {
+    myPeople: "../app/src/components/MyPeople.jsx",
+    userDetail: "../app/src/components/UserDetail.jsx"
+  },
+```
+
+As you add new components, you need to add them to this `entry` attribute.
+
+Each component in this project is treated as it's own react app, so that means each component must mount intself to the `react` element coming from the django template.
+
+This is the contents of a template that was passed a single `user` on it's props.
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+const UserDetail = ({user}) =>
+    <div>
+        <h1>Look at this cool person</h1>
+        <div>
+            {user.username}
+        </div>
+    </div>
+
+
+ReactDOM.render(
+    React.createElement(UserDetail, window.props),
+    window.react_mount,
+)
+```
+
+The `window.props` and `window.react_mount` are defined by the `ReactView`

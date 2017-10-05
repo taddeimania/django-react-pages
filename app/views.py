@@ -17,6 +17,7 @@ class ReactView(TemplateView):
         context['component'] =  self.component
         return context
 
+
 class IndexView(ReactView):
     component = 'myPeople.js'
 
@@ -26,6 +27,7 @@ class IndexView(ReactView):
             'users': USERS
         }
         return context
+
 
 class UserDetailView(ReactView):
     component = 'userDetail.js'
