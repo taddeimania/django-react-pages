@@ -11,31 +11,28 @@ class ReactView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['props'] = {
-            'users': USERS
-        }
         context['component'] =  self.component
+        try:
+            context['props'] = self.get_props()
+        except AttributeError as e:
+            context['props'] = {}
         return context
 
 
 class IndexView(ReactView):
     component = 'myPeople.js'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['props'] = {
+    def get_props(self):
+        return {
             'users': USERS
         }
-        return context
 
 
 class UserDetailView(ReactView):
     component = 'userDetail.js'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_props(self):
         user_id = self.kwargs.get("pk")
-        context['props'] = {
+        return {
             'user': USERS[int(user_id) - 1]
         }
-        return context
